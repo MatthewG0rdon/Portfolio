@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matthew Gordon — Web Designer & UI/UX Specialist</title>
+  <meta name="description" content="Matthew Gordon is a web designer and UI/UX specialist crafting bold, functional digital experiences. Available for freelance, collaborations, and full-time roles." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Matthew Gordon — Web Designer & UI/UX Specialist" />
+  <meta property="og:description" content="Bold, functional digital experiences crafted by Matthew Gordon." />
+  <meta property="og:type" content="website" />
+  <!-- REPLACE: update og:url and og:image with your live URL and a screenshot -->
+  <meta property="og:url" content="https://USERNAME.github.io/portfolio" />
+  <meta property="og:image" content="https://USERNAME.github.io/portfolio/assets/images/og-image.png" />
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       CSS CUSTOM PROPERTIES — edit these to retheme the site
+    ========================================================= */
+    :root {
+      /* Colors */
+      --color-bg:        #0a0a0f;
+      --color-bg-card:   #12121a;
+      --color-bg-glass:  rgba(18, 18, 26, 0.7);
+      --color-border:    rgba(255, 255, 255, 0.08);
+      --color-text:      #e8e8f0;
+      --color-muted:     #8888aa;
+
+      --color-pink:      #ff3cac;
+      --color-cyan:      #00f5d4;
+      --color-amber:     #ffbe0b;
+      --color-purple:    #7b2fff;
+
+      /* Primary accent — change this to retheme interactive elements */
+      --accent:          var(--color-pink);
+      --accent-alt:      var(--color-cyan);
+      --accent-third:    var(--color-amber);
+
+      /* Typography */
+      --font-display:    'Syne', sans-serif;
+      --font-body:       'DM Sans', sans-serif;
+
+      /* Spacing scale */
+      --space-xs:   0.5rem;
+      --space-sm:   1rem;
+      --space-md:   1.5rem;
+      --space-lg:   2.5rem;
+      --space-xl:   4rem;
+      --space-2xl:  6rem;
+      --space-3xl:  10rem;
+
+      /* Radii */
+      --radius-sm:  0.5rem;
+      --radius-md:  1rem;
+      --radius-lg:  1.5rem;
+      --radius-pill: 999px;
+
+      /* Transitions */
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Nav height */
+      --nav-h: 72px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+    ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+
+    /* Focus styles — accessibility */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* =========================================================
+       TYPOGRAPHY HELPERS
+    ========================================================= */
+    .display-xl {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .display-lg {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .display-md {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .accent-word {
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       LAYOUT HELPERS
+    ========================================================= */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    .section {
+      padding-block: var(--space-2xl);
+    }
+
+    .section-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255, 60, 172, 0.4);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo .accent-letter {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--color-text);
+    }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      margin-left: var(--space-md);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: var(--transition);
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile nav drawer */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-md) var(--space-md) var(--space-lg);
+      flex-direction: column;
+      gap: var(--space-sm);
+      z-index: 99;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform var(--transition), opacity var(--transition);
+      pointer-events: none;
+    }
+
+    .nav-mobile.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-mobile a {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-text);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--transition);
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--accent);
+    }
+
+    .nav-mobile .btn {
+      margin-top: var(--space-sm);
+      align-self: flex-start;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      overflow: hidden;
+    }
+
+    /* Animated background orbs */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--color-pink);
+      top: -200px;
+      right: -100px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--color-cyan);
+      bottom: 0;
+      left: -100px;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: var(--color-purple);
+      top: 40%;
+      left: 40%;
+    }
+
+    /* Dot grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-bottom: var(--space-md);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-tag .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-heading {
+      margin-bottom: var(--space-md);
+    }
+
+    .hero-heading em {
+      font-style: normal;
+      color: var(--accent);
+      position: relative;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--color-muted);
+      max-width: 520px;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Animated geometric shape */
+    .hero-shape {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(240px, 35vw, 480px);
+      aspect-ratio: 1;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-shape svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--color-muted), transparent);
+    }
+
+    /* =========================================================
+       HERO ANIMATIONS
+    ========================================================= */
+    @media (prefers-reduced-motion: no-preference) {
+      .orb-1 {
+        animation: floatOrb1 12s ease-in-out infinite alternate;
+      }
+      .orb-2 {
+        animation: floatOrb2 15s ease-in-out infinite alternate;
+      }
+      .orb-3 {
+        animation: floatOrb3 9s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatOrb1 {
+        from { transform: translate(0, 0) scale(1); }
+        to   { transform: translate(-60px, 40px) scale(1.1); }
+      }
+      @keyframes floatOrb2 {
+        from { transform: translate(0, 0) scale(1); }
+        to   { transform: translate(40px, -60px) scale(0.9); }
+      }
+      @keyframes floatOrb3 {
+        from { transform: translate(0, 0); }
+        to   { transform: translate(-30px, 30px); }
+      }
+
+      /* Page-load stagger for hero text */
+      .hero-tag    { animation: fadeSlideUp 0.7s ease both 0.2s; }
+      .hero-heading { animation: fadeSlideUp 0.7s ease both 0.4s; }
+      .hero-sub    { animation: fadeSlideUp 0.7s ease both 0.55s; }
+      .hero-ctas   { animation: fadeSlideUp 0.7s ease both 0.7s; }
+      .hero-shape  { animation: fadeIn 1s ease both 0.9s; }
+
+      @keyframes fadeSlideUp {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      /* Rotating geometric shape */
+      .shape-ring {
+        animation: spinSlow 20s linear infinite;
+        transform-origin: center;
+      }
+      .shape-ring-2 {
+        animation: spinSlow 14s linear infinite reverse;
+        transform-origin: center;
+      }
+      .shape-pulse {
+        animation: pulseBg 4s ease-in-out infinite;
+      }
+
+      @keyframes spinSlow {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+      @keyframes pulseBg {
+        0%, 100% { opacity: 0.6; transform: scale(0.95); }
+        50%       { opacity: 1;   transform: scale(1.05); }
+      }
+
+      /* Scroll line bob */
+      .scroll-line {
+        animation: bobLine 2s ease-in-out infinite;
+      }
+      @keyframes bobLine {
+        0%, 100% { transform: scaleY(1); }
+        50%       { transform: scaleY(0.6); }
+      }
+    }
+
+    /* =========================================================
+       WORK SECTION
+    ========================================================= */
+    #work {
+      background: var(--color-bg);
+    }
+
+    .work-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Filter buttons */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--color-border);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0a0a0f;
+    }
+
+    /* Project grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-color: var(--accent);
+    }
+
+    .project-card.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    .project-img-wrap {
+      position: relative;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+    }
+
+    .project-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,15,0.7) 0%, transparent 60%);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag {
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--color-border);
+      color: var(--color-muted);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap var(--transition);
+    }
+
+    .project-link:hover {
+      gap: 0.7rem;
+    }
+
+    /* =========================================================
+       ABOUT SECTION
+    ========================================================= */
+    #about {
+      background: linear-gradient(to bottom, var(--color-bg), #0d0d16);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .about-eyebrow {
+      margin-bottom: 1rem;
+    }
+
+    .about-heading {
+      margin-bottom: var(--space-md);
+    }
+
+    .about-heading em {
+      font-style: normal;
+      color: var(--accent-alt);
+    }
+
+    .about-bio {
+      color: var(--color-muted);
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
+    }
+
+    .about-bio strong {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    /* Skills */
+    .skills-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .skill-badge {
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      transition: var(--transition);
+    }
+
+    .skill-badge:hover {
+      background: rgba(255, 60, 172, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      display: flex;
+      gap: var(--space-lg);
+      padding: var(--space-md) 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    /* Photo / visual placeholder */
+    .about-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-photo-frame {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      /* REPLACE: swap the background/gradient for your actual photo using <img> */
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-placeholder-text {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .about-photo-frame::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      z-index: -1;
+    }
+
+    /* Decorative ring behind photo */
+    .about-ring {
+      position: absolute;
+      width: 120%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 60, 172, 0.15);
+      border-radius: 50%;
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .about-ring-2 {
+      width: 110%;
+      border-color: rgba(0, 245, 212, 0.1);
+    }
+
+    /* =========================================================
+       TESTIMONIALS SECTION
+    ========================================================= */
+    #testimonials {
+      background: #0d0d16;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      position: relative;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 60, 172, 0.3);
+    }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 0.8;
+      color: var(--accent);
+      opacity: 0.4;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      margin-bottom: var(--space-md);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--color-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .author-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .author-role {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    /* =========================================================
+       CONTACT SECTION
+    ========================================================= */
+    #contact {
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(255,60,172,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    .contact-info {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+
+    .contact-heading {
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-sub {
+      color: var(--color-muted);
+      margin-bottom: var(--space-lg);
+      line-height: 1.7;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      transition: color var(--transition);
+    }
+
+    .contact-detail:hover {
+      color: var(--accent);
+    }
+
+    .contact-detail svg {
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    /* Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: var(--color-bg-card);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      appearance: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(136, 136, 170, 0.5);
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,60,172,0.12);
+    }
+
+    .form-input.error,
+    .form-select.error,
+    .form-textarea.error {
+      border-color: #ff6b6b;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238888aa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-select option {
+      background: var(--color-bg-card);
+    }
+
+    .form-error {
+      font-size: 0.75rem;
+      color: #ff6b6b;
+      display: none;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .form-submit {
+      align-self: flex-start;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+    }
+
+    /* Success / error message */
+    .form-message {
+      display: none;
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      font-weight: 500;
+    }
+
+    .form-message.success {
+      display: block;
+      background: rgba(0, 245, 212, 0.1);
+      border: 1px solid var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    .form-message.error-msg {
+      display: block;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid #ff6b6b;
+      color: #ff6b6b;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    .footer {
+      border-top: 1px solid var(--accent);
+      padding: var(--space-lg) 0;
+      background: var(--color-bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      color: var(--color-muted);
+      transition: border-color var(--transition), color var(--transition), background var(--transition);
+    }
+
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(255,60,172,0.08);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 900px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: flex;
+      }
+
+      .hero-shape {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual {
+        order: -1;
+      }
+
+      .about-photo-frame {
+        max-width: 100%;
+        aspect-ratio: 16/9;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        position: static;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-strip {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* =========================================================
+       PRINT STYLES
+    ========================================================= */
+    @media print {
+      .nav,
+      .nav-mobile,
+      .hero-bg,
+      .hero-shape,
+      .hero-scroll,
+      .footer-social,
+      .contact-form {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      #hero {
+        min-height: auto;
+        padding-top: 2rem;
+      }
+
+      .section {
+        padding-block: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================= -->
+  <nav class="nav" id="mainNav" aria-label="Main navigation">
+    <div class="container nav-inner">
+
+      <!-- REPLACE: Update your name/logo styling as desired -->
+      <a href="#hero" class="nav-logo" aria-label="Matthew Gordon — Home">
+        Matthew<span class="accent-letter">.</span>Gordon
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#work"         class="nav-link">Work</a></li>
+        <li><a href="#about"        class="nav-link">About</a></li>
+        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        <li><a href="#contact"      class="nav-link">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary nav-cta">Hire Me</a>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="nav-mobile" id="mobileNav" aria-hidden="true">
+    <a href="#work"         onclick="closeMobileNav()">Work</a>
+    <a href="#about"        onclick="closeMobileNav()">About</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
+    <a href="#contact"      onclick="closeMobileNav()">Contact</a>
+    <a href="#contact" class="btn btn-primary" onclick="closeMobileNav()">Hire Me</a>
+  </div>
+
+  <main id="main-content">
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+    <section id="hero" aria-label="Introduction">
+
+      <!-- Animated background -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+
+      <!-- Animated geometric decoration -->
+      <div class="hero-shape" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer ring -->
+          <circle class="shape-ring" cx="200" cy="200" r="190" fill="none"
+            stroke="rgba(255,60,172,0.2)" stroke-width="1"
+            stroke-dasharray="8 6" />
+          <!-- Second ring -->
+          <circle class="shape-ring-2" cx="200" cy="200" r="150" fill="none"
+            stroke="rgba(0,245,212,0.15)" stroke-width="1" />
+          <!-- Pulsing center blob -->
+          <circle class="shape-pulse" cx="200" cy="200" r="90"
+            fill="rgba(123,47,255,0.15)" />
+          <!-- Inner core -->
+          <circle cx="200" cy="200" r="60"
+            fill="none" stroke="rgba(255,190,11,0.3)" stroke-width="1.5" />
+          <!-- Cross hairs -->
+          <line x1="200" y1="100" x2="200" y2="300"
+            stroke="rgba(255,60,172,0.1)" stroke-width="1" />
+          <line x1="100" y1="200" x2="300" y2="200"
+            stroke="rgba(255,60,172,0.1)" stroke-width="1" />
+          <!-- Corner marks -->
+          <path d="M40 40 L40 70 M40 40 L70 40" stroke="rgba(0,245,212,0.4)"
+            stroke-width="2" fill="none" stroke-linecap="round" />
+          <path d="M360 40 L360 70 M360 40 L330 40" stroke="rgba(0,245,212,0.4)"
+            stroke-width="2" fill="none" stroke-linecap="round" />
+          <path d="M40 360 L40 330 M40 360 L70 360" stroke="rgba(0,245,212,0.4)"
+            stroke-width="2" fill="none" stroke-linecap="round" />
+          <path d="M360 360 L360 330 M360 360 L330 360" stroke="rgba(0,245,212,0.4)"
+            stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+
+          <!-- REPLACE: Update status / availability indicator -->
+          <div class="hero-tag">
+            <span class="dot" aria-hidden="true"></span>
+            Available for freelance — Spring 2025
+          </div>
+
+          <!-- REPLACE: Edit this headline to match your voice -->
+          <h1 class="display-xl hero-heading">
+            I Design Digital<br/>
+            Experiences That<br/>
+            <em>Don't Blend In</em>
+          </h1>
+
+          <!-- REPLACE: Update your location -->
+          <p class="hero-sub">
+            Web Designer &amp; UI/UX Specialist based in <strong>[City, Country]</strong> —
+            turning brand ambitions into bold, functional interfaces.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#work" class="btn btn-primary">See My Work</a>
+            <!-- REPLACE: Link to your actual resume PDF -->
+            <a href="assets/resume.pdf" class="btn btn-outline" download>
+              Download Resume
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         WORK / PROJECTS
+    ========================================================= -->
+    <section id="work" class="section" aria-label="Project showcase">
+      <div class="container">
+
+        <div class="work-header">
+          <div class="section-header" style="margin-bottom:0">
+            <p class="label reveal">Selected Work</p>
+            <h2 class="display-lg reveal reveal-delay-1">
+              Projects that <span class="accent-word">ship</span>
+            </h2>
+          </div>
+
+          <!-- Filter buttons -->
+          <div class="filter-bar reveal reveal-delay-2" role="group" aria-label="Filter projects by category">
+            <button class="filter-btn active" data-filter="all"      aria-pressed="true">All</button>
+            <button class="filter-btn"        data-filter="ui-ux"    aria-pressed="false">UI/UX</button>
+            <button class="filter-btn"        data-filter="freelance" aria-pressed="false">Freelance</button>
+            <button class="filter-btn"        data-filter="personal" aria-pressed="false">Personal</button>
+          </div>
+        </div>
+
+        <div class="project-grid" id="projectGrid">
+
+          <!-- PROJECT 1 — FinTrack Dashboard -->
+          <article class="project-card reveal" data-category="ui-ux" aria-label="FinTrack Dashboard project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/fintrack/600/400"
+                alt="FinTrack Dashboard — UI/UX redesign screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">FinTrack Dashboard</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">UI/UX redesign for a personal finance app — simplifying complex data into clear, actionable insight.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">Figma</span></li>
+                <li><span class="tag">UI/UX</span></li>
+                <li><span class="tag">Dashboard</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your actual project URL -->
+              <a href="#" class="project-link" aria-label="View FinTrack Dashboard project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJECT 2 — Pulse Health App -->
+          <article class="project-card reveal reveal-delay-1" data-category="ui-ux" aria-label="Pulse Health App project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/pulsehealth/600/400"
+                alt="Pulse Health App — Mobile UI design screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Pulse Health App</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">Mobile-first health tracking app design with a focus on habit reinforcement and frictionless data entry.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">Mobile</span></li>
+                <li><span class="tag">UI/UX</span></li>
+                <li><span class="tag">Prototyping</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your actual project URL -->
+              <a href="#" class="project-link" aria-label="View Pulse Health App project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJECT 3 — Harvest & Co. -->
+          <article class="project-card reveal reveal-delay-2" data-category="freelance" aria-label="Harvest and Co project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/harvestandco/600/400"
+                alt="Harvest and Co — Brand website screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Harvest &amp; Co.</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">Brand website for a boutique food company — warm, editorial design that communicates craft and authenticity.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">Web Design</span></li>
+                <li><span class="tag">Branding</span></li>
+                <li><span class="tag">Webflow</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your actual project URL -->
+              <a href="#" class="project-link" aria-label="View Harvest and Co project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJECT 4 — LexaLaw Group -->
+          <article class="project-card reveal reveal-delay-3" data-category="freelance" aria-label="LexaLaw Group project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/lexalaw/600/400"
+                alt="LexaLaw Group — Law firm website screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">LexaLaw Group</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">Law firm website redesign — repositioning a dated presence with a clean, trustworthy, conversion-focused layout.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">Web Design</span></li>
+                <li><span class="tag">WordPress</span></li>
+                <li><span class="tag">SEO</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your actual project URL -->
+              <a href="#" class="project-link" aria-label="View LexaLaw Group project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJECT 5 — ColorScale -->
+          <article class="project-card reveal reveal-delay-4" data-category="personal" aria-label="ColorScale tool project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/colorscale/600/400"
+                alt="ColorScale — Color palette generator tool screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">ColorScale</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">Open-source color palette generator — built for designers who need WCAG-compliant scales, fast.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">HTML/CSS/JS</span></li>
+                <li><span class="tag">Tool</span></li>
+                <li><span class="tag">Open Source</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your GitHub repo URL -->
+              <a href="#" class="project-link" aria-label="View ColorScale project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJECT 6 — Grid Theory -->
+          <article class="project-card reveal reveal-delay-5" data-category="personal" aria-label="Grid Theory experiment project">
+            <div class="project-img-wrap">
+              <img
+                src="https://picsum.photos/seed/gridtheory/600/400"
+                alt="Grid Theory — Typography and grid layout exploration screenshot"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="project-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Grid Theory</h3>
+              <!-- REPLACE: Edit this description -->
+              <p class="project-desc">An experimental typography and grid layout exploration — testing the outer limits of CSS and visual rhythm.</p>
+              <ul class="project-tags" aria-label="Technologies used">
+                <li><span class="tag">CSS</span></li>
+                <li><span class="tag">Typography</span></li>
+                <li><span class="tag">Experimental</span></li>
+              </ul>
+              <!-- REPLACE: Replace href with your actual project URL -->
+              <a href="#" class="project-link" aria-label="View Grid Theory project">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /project-grid -->
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ABOUT
+    ========================================================= -->
+    <section id="about" class="section" aria-label="About Matthew Gordon">
+      <div class="container">
+        <div class="about-grid">
+
+          <!-- Left: text -->
+          <div>
+            <p class="label about-eyebrow reveal">About Me</p>
+            <!-- REPLACE: Edit this headline to your taste -->
+            <h2 class="display-lg about-heading reveal reveal-delay-1">
+              A designer who thinks in <em>systems</em><br/>
+              and feels in aesthetics.
+            </h2>
+
+            <!-- REPLACE: Replace placeholder bio with your real story -->
+            <p class="about-bio reveal reveal-delay-2">
+              I'm <strong>Matthew Gordon</strong> — a web designer with
+              <strong>[X] years</strong> of experience crafting bold, functional digital
+              experiences. I specialize in UI/UX design, freelance client work, and
+              passion projects that push the boundaries of what the web can look like.
+              When I'm not designing, I'm probably dissecting interfaces I find interesting.
+            </p>
+
+            <p class="skills-label reveal reveal-delay-3">Core Skills</p>
+            <div class="skills-grid reveal reveal-delay-3" role="list" aria-label="Skills">
+              <span class="skill-badge" role="listitem">HTML/CSS</span>
+              <span class="skill-badge" role="listitem">JavaScript</span>
+              <span class="skill-badge" role="listitem">Figma</span>
+              <span class="skill-badge" role="listitem">Webflow</span>
+              <span class="skill-badge" role="listitem">UI/UX</span>
+              <span class="skill-badge" role="listitem">Branding</span>
+              <span class="skill-badge" role="listitem">Prototyping</span>
+              <span class="skill-badge" role="listitem">Adobe XD</span>
+            </div>
+
+            <!-- REPLACE: Update these numbers to match your actual experience -->
+            <div class="stats-strip reveal reveal-delay-4">
+              <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Projects</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">30+</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: photo / visual -->
+          <div class="about-visual reveal reveal-delay-2">
+            <div class="about-ring about-ring-2" aria-hidden="true"></div>
+            <div class="about-ring"              aria-hidden="true"></div>
+            <!--
+              REPLACE: To use your actual photo, replace the div below with:
+              <img src="assets/images/matthew-gordon.jpg"
+                   alt="Matthew Gordon — Web Designer"
+                   class="about-photo-frame" style="object-fit:cover" />
+            -->
+            <div class="about-photo-frame" role="img" aria-label="Photo placeholder — replace with your headshot">
+              <p class="photo-placeholder-text">
+                Your photo here<br/>
+                <span style="font-size:0.65rem; opacity:0.5">(replace in HTML)</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TESTIMONIALS
+    ========================================================= -->
+    <section id="testimonials" class="section" aria-label="Client testimonials">
+      <div class="container">
+
+        <div class="section-header" style="text-align:center">
+          <p class="label reveal">Testimonials</p>
+          <h2 class="display-lg reveal reveal-delay-1">
+            What <span class="accent-word">clients</span> say
+          </h2>
+        </div>
+
+        <div class="testimonial-grid">
+
+          <!-- REPLACE: Update with real testimonials as you collect them -->
+          <article class="testimonial-card reveal" aria-label="Testimonial from Sarah Chen">
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <blockquote>
+              <p class="testimonial-text">
+                Matthew completely transformed our product's dashboard. The clarity and
+                visual polish he brought made our users fall in love with the interface overnight.
+              </p>
+            </blockquote>
+            <footer class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">SC</div>
+              <div class="author-info">
+                <span class="author-name">Sarah Chen</span>
+                <span class="author-role">Product Manager, Fintech Co.</span>
+              </div>
+            </footer>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-1" aria-label="Testimonial from James Whitfield">
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <blockquote>
+              <p class="testimonial-text">
+                Working with Matthew was the easiest design decision we ever made. He
+                understood our brand instantly and delivered something better than we imagined.
+              </p>
+            </blockquote>
+            <footer class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">JW</div>
+              <div class="author-info">
+                <span class="author-name">James Whitfield</span>
+                <span class="author-role">Founder, Harvest &amp; Co.</span>
+              </div>
+            </footer>
+          </article>
+
+          <article class="testimonial-card reveal reveal-delay-2" aria-label="Testimonial from Priya Nair">
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <blockquote>
+              <p class="testimonial-text">
+                Matthew's designs are not just beautiful — they're built with developers in
+                mind. Clean specs, thoughtful component logic, and always on time.
+              </p>
+            </blockquote>
+            <footer class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">PN</div>
+              <div class="author-info">
+                <span class="author-name">Priya Nair</span>
+                <span class="author-role">Lead Developer, DevStudio</span>
+              </div>
+            </footer>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CONTACT
+    ========================================================= -->
+    <section id="contact" class="section" aria-label="Contact form">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- Left: info -->
+          <div class="contact-info">
+            <p class="label reveal">Get In Touch</p>
+            <h2 class="display-lg contact-heading reveal reveal-delay-1">
+              Let's Build Something <span class="accent-word">Bold.</span>
+            </h2>
+            <p class="contact-sub reveal reveal-delay-2">
+              Available for freelance projects, collaborations, and full-time opportunities.
+            </p>
+
+            <!-- REPLACE: Add your real email and location -->
+            <a href="mailto:hello@matthewgordon.com" class="contact-detail reveal reveal-delay-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              hello@matthewgordon.com
+            </a>
+
+            <span class="contact-detail reveal reveal-delay-4">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <!-- REPLACE: Your city and country -->
+              [City, Country]
+            </span>
+          </div>
+
+          <!-- Right: form -->
+          <div class="reveal reveal-delay-2">
+            <!--
+              REPLACE: Formspree setup
+              1. Go to https://formspree.io and create a free account
+              2. Create a new form and copy your Form ID
+              3. Replace YOUR_FORM_ID below with your actual ID
+                 e.g. action="https://formspree.io/f/xrgvwkep"
+            -->
+            <form
+              class="contact-form"
+              id="contactForm"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+              accept-charset="UTF-8"
+              novalidate
+            >
+              <!-- Hidden subject field for Formspree -->
+              <input type="hidden" name="_subject" value="New inquiry from matthewgordon.com" />
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="name">Name *</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Jane Smith"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                    aria-describedby="name-error"
+                  />
+                  <span class="form-error" id="name-error" role="alert">Please enter your name.</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email *</label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="jane@company.com"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="email-error"
+                  />
+                  <span class="form-error" id="email-error" role="alert">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="project-type">Project Type *</label>
+                <select
+                  class="form-select"
+                  id="project-type"
+                  name="project_type"
+                  required
+                  aria-required="true"
+                  aria-describedby="project-error"
+                >
+                  <option value="" disabled selected>Select a project type…</option>
+                  <option value="Web Design">Web Design</option>
+                  <option value="UI/UX">UI/UX</option>
+                  <option value="Branding">Branding</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="form-error" id="project-error" role="alert">Please select a project type.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="message">Message *</label>
+                <textarea
+                  class="form-textarea"
+                  id="message"
+                  name="message"
+                  placeholder="Tell me about your project — scope, timeline, budget…"
+                  required
+                  aria-required="true"
+                  aria-describedby="message-error"
+                ></textarea>
+                <span class="form-error" id="message-error" role="alert">Please enter a message.</span>
+              </div>
+
+              <!-- Status messages -->
+              <div class="form-message success" id="formSuccess" role="status" aria-live="polite">
+                Message sent! I'll get back to you within 1–2 business days.
+              </div>
+              <div class="form-message error-msg" id="formError" role="alert" aria-live="assertive">
+                Something went wrong. Please try again or email me directly.
+              </div>
+
+              <button type="submit" class="btn btn-primary form-submit">
+                Send Message
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container footer-inner">
+
+      <p class="footer-copy">
+        <!-- REPLACE: Update year as needed -->
+        &copy; 2025 Matthew Gordon. All rights reserved.
+      </p>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="footer-social">
+        <!-- REPLACE: Update these URLs with your actual profiles -->
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+           aria-label="Matthew Gordon on GitHub">
+          <!-- GitHub SVG icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"
+           aria-label="Matthew Gordon on LinkedIn">
+          <!-- LinkedIn SVG icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"
+           aria-label="Matthew Gordon on X (Twitter)">
+          <!-- X / Twitter SVG icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.261 5.634 5.903-5.634zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+  <script>
+    'use strict';
+
+    /* ----------------------------------------------------------
+       1. MOBILE NAV TOGGLE
+    ---------------------------------------------------------- */
+    const hamburger  = document.getElementById('hamburger');
+    const mobileNav  = document.getElementById('mobileNav');
+    let   navOpen    = false;
+
+    function openMobileNav() {
+      navOpen = true;
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.classList.add('open');
+      mobileNav.removeAttribute('aria-hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      navOpen = false;
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      navOpen ? closeMobileNav() : openMobileNav();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navOpen) closeMobileNav();
+    });
+
+    /* ----------------------------------------------------------
+       2. NAV SCROLL SHADOW
+    ---------------------------------------------------------- */
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      mainNav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ----------------------------------------------------------
+       3. ACTIVE NAV LINK (IntersectionObserver)
+    ---------------------------------------------------------- */
+    const navLinks   = document.querySelectorAll('.nav-link');
+    const sections   = document.querySelectorAll('section[id]');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, {
+      rootMargin: `-${getComputedStyle(document.documentElement).getPropertyValue('--nav-h') || '72px'} 0px -60% 0px`,
+      threshold: 0
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    /* ----------------------------------------------------------
+       4. SCROLL REVEAL (IntersectionObserver)
+    ---------------------------------------------------------- */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target); // animate once
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ----------------------------------------------------------
+       5. PROJECT FILTER
+    ---------------------------------------------------------- */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        // Update button states
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        // Filter cards
+        projectCards.forEach(card => {
+          const category = card.dataset.category;
+          const show = filter === 'all' || category === filter;
+
+          if (show) {
+            card.classList.remove('hidden');
+            // Ensure visible cards are revealed (they may already be)
+            card.classList.add('is-visible');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    /* ----------------------------------------------------------
+       6. CONTACT FORM VALIDATION
+    ---------------------------------------------------------- */
+    const contactForm  = document.getElementById('contactForm');
+    const formSuccess  = document.getElementById('formSuccess');
+    const formError    = document.getElementById('formError');
+
+    function showError(inputEl, errorEl, show) {
+      inputEl.classList.toggle('error', show);
+      errorEl.classList.toggle('show', show);
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nameEl    = document.getElementById('name');
+      const emailEl   = document.getElementById('email');
+      const projectEl = document.getElementById('project-type');
+      const msgEl     = document.getElementById('message');
+
+      // Hide old status messages
+      formSuccess.style.display = 'none';
+      formError.style.display   = 'none';
+      formSuccess.classList.remove('success');
+      formError.classList.remove('error-msg');
+
+      let valid = true;
+
+      // Name
+      if (!nameEl.value.trim()) {
+        showError(nameEl, document.getElementById('name-error'), true);
+        valid = false;
+      } else {
+        showError(nameEl, document.getElementById('name-error'), false);
+      }
+
+      // Email
+      if (!validateEmail(emailEl.value.trim())) {
+        showError(emailEl, document.getElementById('email-error'), true);
+        valid = false;
+      } else {
+        showError(emailEl, document.getElementById('email-error'), false);
+      }
+
+      // Project type
+      if (!projectEl.value) {
+        showError(projectEl, document.getElementById('project-error'), true);
+        valid = false;
+      } else {
+        showError(projectEl, document.getElementById('project-error'), false);
+      }
+
+      // Message
+      if (!msgEl.value.trim()) {
+        showError(msgEl, document.getElementById('message-error'), true);
+        valid = false;
+      } else {
+        showError(msgEl, document.getElementById('message-error'), false);
+      }
+
+      if (!valid) return;
+
+      // Submit to Formspree via fetch (avoid page redirect)
+      const submitBtn = contactForm.querySelector('.form-submit');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending…';
+
+      try {
+        const data = new FormData(contactForm);
+        const res  = await fetch(contactForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          contactForm.reset();
+          formSuccess.style.display = 'block';
+          formSuccess.classList.add('success');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        formError.style.display = 'block';
+        formError.classList.add('error-msg');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+
+    // Clear individual field errors on input
+    ['name', 'email', 'project-type', 'message'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => {
+        el.classList.remove('error');
+      });
+    });
+
+    /* ----------------------------------------------------------
+       7. SMOOTH SCROLL fallback (for browsers that ignore CSS)
+    ---------------------------------------------------------- */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const navH = mainNav.offsetHeight;
+        const top  = target.getBoundingClientRect().top + window.scrollY - navH;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+  </script>
+
+</body>
+</html>
